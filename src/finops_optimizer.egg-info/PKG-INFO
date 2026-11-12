@@ -1,0 +1,158 @@
+Metadata-Version: 2.4
+Name: finops-optimizer
+Version: 1.0.0
+Summary: Multi-cloud FinOps tool for AWS and Azure cost optimization
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: boto3>=1.34.0
+Requires-Dist: azure-identity>=1.16.0
+Requires-Dist: azure-mgmt-costmanagement>=2.0.1
+Requires-Dist: azure-mgmt-compute>=35.0.0
+Requires-Dist: azure-mgmt-resource>=20.0.0
+Requires-Dist: rich>=13.0.0
+Requires-Dist: tabulate>=0.9.0
+Requires-Dist: python-dateutil>=2.8.0
+Requires-Dist: matplotlib>=3.8.0
+Requires-Dist: pandas>=2.0.0
+Requires-Dist: click>=8.1.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.0.0; extra == "dev"
+
+# FinOps Optimizer
+
+A comprehensive multi-cloud cost optimization tool for AWS and Azure.
+
+## Features
+
+- **Cost Analysis**: Analyze spending patterns across AWS and Azure
+- **Optimization Recommendations**: AI-powered suggestions for cost savings
+- **Resource Rightsizing**: Identify over/under-provisioned resources
+- **Idle Resource Detection**: Find unused resources
+- **Reserved Instance/Savings Plan Analysis**: Recommendations for commitment strategies
+- **Multi-cloud Reporting**: Unified dashboard and CLI output
+
+## Quick Start
+
+```bash
+pip install -e .
+finops analyze --aws --azure
+```
+
+## AWS Commands
+
+```bash
+# Analyze AWS costs
+finops aws analyze --cost-categories "Compute,Storage" --months 3
+
+# Find idle EC2 instances
+finops aws identify-idle --threshold-hours 24
+
+# Right-size EC2 instances
+finops aws rightsize --max-savings-percent 30
+
+# Reserved Instance recommendations
+finops aws reserved-recommendations --terms yearly,monthly
+
+# Identify orphaned EBS volumes
+finops aws orphaned-volumes
+```
+
+## Azure Commands
+
+```bash
+# Analyze Azure costs
+finops azure analyze --scope "/subscriptions/{subscription-id}" --months 3
+
+# Find under-utilized VMs
+finops azure identify-idle --threshold-percent 15
+
+# Azure savings plan recommendations
+finops azure savings-recommendations
+
+# Identify unattached disks
+finops azure orphaned-disks
+
+# Azure reserved instance recommendations
+finops azure reserved-recommendations
+```
+
+## Combined Multi-cloud Commands
+
+```bash
+# Full optimization scan
+finops analyze --aws --azure --all
+
+# Generate comprehensive report
+finops report --format pdf --output ./reports/
+
+# Export data for BI tools
+finops export --format csv --output ./exports/
+```
+
+## AWS Cost Saving Actions
+
+1. **EC2 Optimization**
+   - Stop/terminate idle instances
+   - Right-size based on utilization
+   - Convert On-Demand to Reserved Instances
+   - Use Spot instances for fault-tolerant workloads
+
+2. **Storage Optimization**
+   - Movecold data to Glacier
+   - Delete orphaned volumes
+   - Enable S3 Intelligent-Tiering
+   - Reduce storage classes (EBS gp2 → gp3)
+
+3. **Networking**
+   - Eliminate unused Elastic IPs
+   - Optimize data transfer costs
+   - Use VPC endpoints to reduce data transfer
+
+4. **Reserved Instances & Savings Plans**
+   - Convert high-utilization instances to RIs
+   - Use Compute Savings Plans for flexible workloads
+
+## Azure Cost Saving Actions
+
+1. **VM Optimization**
+   - Stop dev/test VMs outside working hours
+   - Right-size based on performance data
+   - Use Spot VMs for batch workloads
+   - Convert to reserved instances
+
+2. **Storage Optimization**
+   - Move blob storage to Cool/Archive tiers
+   - Clean up unattached disks
+   - Optimize managed disk sizes
+
+3. **Networking**
+   - Delete unused public IPs
+   - Use Azure Virtual WAN for optimized routing
+   - Enable accelerated networking where beneficial
+
+4. **Azure Reservations**
+   - Purchase reservations for consistent workloads
+   - Use Azure Hybrid Benefit for Windows VMs
+
+## Installation
+
+```bash
+# With pip
+pip install finops-optimizer
+
+# From source
+git clone <repo-url>
+cd finops-tool
+pip install -e .
+```
+
+## Configuration
+
+The tool uses AWS CLI credentials and Azure Service Principal authentication:
+
+**AWS**: Set up via `aws configure` or use environment variables
+**Azure**: Set environment variables:
+- `AZURE_CLIENT_ID`
+- `AZURE_CLIENT_SECRET`
+- `AZURE_TENANT_ID`

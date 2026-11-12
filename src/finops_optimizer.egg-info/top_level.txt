@@ -1,0 +1,4 @@
+cli
+cost_optimization
+finops_optimizer
+reports

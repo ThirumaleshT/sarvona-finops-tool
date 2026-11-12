@@ -1,0 +1,11 @@
+.env
+.env.*
+.streamlit/secrets.toml
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.log
+*.bat
+gui_launcher.py
+simple_gui_launcher.py
