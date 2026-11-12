@@ -366,7 +366,8 @@ if st.session_state.connected:
                 st.info(f"🔵 {len(medium)} Medium severity anomalies")
 
             for anomaly in detector.anomalies[:10]:
-                with st.expander(f"{anomaly.severity.value.title()}: {anomaly.anomaly_type.value.replace('_', ' ').title()} - {anomaly.resource_name}")
+                anomaly_type_display = anomaly.anomaly_type.value.replace('_', ' ').title()
+                with st.expander(f"{anomaly.severity.value.title()}: {anomaly_type_display} - {anomaly.resource_name}"):
                     st.write(f"**Provider:** {anomaly.provider}")
                     st.write(f"**Period:** {anomaly.period}")
                     st.write(f"**Actual:** ${anomaly.actual_value:,.2f}")
