@@ -19,7 +19,7 @@ from analytics.data_explorer import DataExplorer, VirtualCostDataSource
 from governance.rbac import RBACEngine, GovernanceEngine
 from cloud_checkr_style.core import CloudCheckrStyleEngine, ResourceType, CloudProvider
 
-st.set_page_config(page_title="AI FinOps Optimizer", page_icon="🧠", layout="wide")
+st.set_page_config(page_title="SARVONA FinOps Optimizer", page_icon="📊", layout="wide")
 
 st.markdown("""
     <style>
@@ -32,7 +32,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-st.title("🧠 AI FinOps Optimizer - Multi-Cloud Governance")
+st.title("📊 SARVONA FinOps Optimizer - Multi-Cloud Cost Governance")
 st.markdown("---")
 
 if 'connected' not in st.session_state:
@@ -448,7 +448,7 @@ else:
     st.markdown("---")
 
     features = [
-        {"icon": "🎯", "title": "AI-Powered", "desc": "Machine learning identifies anomalies and optimization opportunities"},
+        {"icon": "🎯", "title": "Smart Analysis", "desc": "Statistical checks spot cost anomalies and optimization opportunities"},
         {"icon": "🏢", "title": "Multi-Cloud", "desc": "Unified view for AWS, Azure, and GCP"},
         {"icon": "🏷️", "title": "Virtual Tags", "desc": "Rule-based cost allocation to business owners"},
         {"icon": "💰", "title": "Budgeting", "desc": "Create budgets, forecasts, and track variance"},

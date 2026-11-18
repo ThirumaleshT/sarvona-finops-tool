@@ -1,6 +1,6 @@
-# AI FinOps Optimizer
+# SARVONA FinOps Optimizer
 
-A comprehensive AI-powered multi-cloud cost optimization tool combining CloudCheckr and Economize features.
+A multi-cloud cost optimization tool for AWS, Azure and GCP: cost breakdowns, budgets, anomaly detection and governance checks.
 
 ## Quick Start
 
@@ -18,11 +18,11 @@ finops --help
 
 ## Key Features
 
-### AI-Powered Intelligence
-- **Automated Rightsizing**: ML-driven instance size recommendations
+### Analysis
+- **Automated Rightsizing**: Instance size recommendations from utilisation data
 - **Anomaly Detection**: Statistical anomaly detection with confidence scoring
 - **Demand Forecasting**: 3-month cost forecasting with uncertainty ranges
-- **Reservation Optimization**: AI-powered committed usage recommendations
+- **Reservation Optimization**: Committed usage recommendations
 - **Commitment Strategy**: Enterprise discount program optimization
 
 ### CloudCheckr-Style Features
@@ -47,7 +47,7 @@ finops --help
 - Cost breakdown by service
 
 ### AI Insights Tab
-- Top 10 AI-powered recommendations
+- Top 10 cost-saving recommendations
 - Confidence scores and expected savings
 - Implementation effort ratings
 
@@ -163,7 +163,7 @@ The tool generates:
 
 1. Run the AI Dashboard: `run-ai-dashboard.bat`
 2. Connect your cloud accounts
-3. Review AI-powered insights
+3. Review the cost insights
 4. Export action plan
 5. Implement optimization actions
 6. Monitor savings monthly
