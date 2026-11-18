@@ -25,6 +25,8 @@ st.markdown("""
     <style>
     .main { background-color: #0e1117; }
     .stMetric { background-color: #16213e; padding: 15px; border-radius: 10px; border: 1px solid #0f3460; }
+    .stMetric [data-testid="stMetricLabel"], .stMetric [data-testid="stMetricLabel"] * { color: #c9d4e5 !important; }
+    .stMetric [data-testid="stMetricValue"], .stMetric [data-testid="stMetricValue"] * { color: #ffffff !important; }
     .stTabs [data-baseweb="tab-list"] { gap: 24px; }
     .stTabs [data-baseweb="tab"] { padding: 12px 24px; }
     </style>
@@ -437,7 +439,7 @@ else:
         st.markdown("[![AWS](https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original.svg)](https://aws.amazon.com/)")
         st.markdown("### AWS Support\nRight-sizing, RIs, Storage optimization")
     with c2:
-        st.markdown("[![Azure](https://raw.githubusercontent.com/devicons/devicon/master/icons/microsoftazure/microsoftazure-original.svg)](https://azure.microsoft.com/)")
+        st.markdown("[![Azure](https://raw.githubusercontent.com/devicons/devicon/master/icons/azure/azure-original.svg)](https://azure.microsoft.com/)")
         st.markdown("### Azure Support\nVM optimization, Reservations, Hybrid Benefit")
     with c3:
         st.markdown("[![GCP](https://raw.githubusercontent.com/devicons/devicon/master/icons/google/google-original.svg)](https://cloud.google.com/)")
