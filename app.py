@@ -35,8 +35,6 @@ st.markdown("---")
 
 if 'connected' not in st.session_state:
     st.session_state.connected = False
-if 'cloud_credentials' not in st.session_state:
-    st.session_state.cloud_credentials = {}
 if 'resources' not in st.session_state:
     st.session_state.resources = []
 if 'budgets' not in st.session_state:
@@ -53,31 +51,23 @@ if 'data_explorer' not in st.session_state:
     st.session_state.data_explorer = None
 
 with st.sidebar:
-    st.header("☁️ Cloud Onboarding")
+    st.header("☁️ Sample environment")
+    st.info(
+        "This tool runs on sample data. No cloud account is connected and no keys or "
+        "passwords are needed. Never enter real credentials here. Connecting real accounts "
+        "will use read-only access that you approve and can revoke."
+    )
     providers = st.multiselect("Select Providers", ["AWS", "Azure", "GCP"], default=["AWS", "Azure"])
-
-    with st.expander("AWS Config"):
-        aws_region = st.text_input("Region", "us-east-1")
-        aws_access_key = st.text_input("Access Key ID", type="password")
-        aws_secret_key = st.text_input("Secret Access Key", type="password")
-
-    with st.expander("Azure Config"):
-        azure_sub_id = st.text_input("Subscription ID")
-        azure_auth_method = st.selectbox("Auth Method", ["Interactive Browser", "Service Principal"])
+    aws_region = st.selectbox("Sample AWS region", ["us-east-1", "eu-west-1", "ap-south-1"])
 
     st.markdown("---")
     st.header("📊 Financial Planning")
     budget_amount = st.number_input("Monthly Budget ($)", value=5000.0, min_value=0.0, step=100.0)
 
-    if st.button("🚀 Onboard & Analyze", use_container_width=True):
-        with st.spinner("Connecting to cloud APIs and initializing engines..."):
+    if st.button("🚀 Analyse sample data", use_container_width=True):
+        with st.spinner("Loading sample data and running the analysis..."):
             import time
             time.sleep(1)
-
-            st.session_state.cloud_credentials = {
-                'aws': {'region': aws_region, 'access_key': aws_access_key, 'secret_key': aws_secret_key},
-                'azure': {'subscription_id': azure_sub_id, 'auth_method': azure_auth_method}
-            }
 
             sample_resources = [
                 {"id": "web-prod-ec2-001", "name": "Web-Prod-EC2", "provider": "AWS", "type": "Compute",
@@ -140,9 +130,10 @@ with st.sidebar:
                 credentials_path=None
             )
 
-            st.success("Successfully Onboarded! Multi-cloud environment initialized.")
+            st.success("Sample environment loaded. All figures below are sample data.")
 
 if st.session_state.connected:
+    st.warning("Sample data: these results are examples, not an analysis of your cloud account.")
     col1, col2, col3, col4 = st.columns(4)
     total_cost = sum(r.get("monthly_cost", r.get("cost", 0)) for r in st.session_state.resources)
     total_savings = sum(r.get("PotentialSavings", 0) for r in st.session_state.resources)
@@ -289,8 +280,8 @@ if st.session_state.connected:
         scenario_df = pd.DataFrame(scenario_results)
         if not scenario_df.empty:
             st.write(f"**{scenario.name}** - {scenario.description}")
-            st.write(f"Baseline: ${sum(historical_data[-3:], key=lambda x: x['amount']):,.2f}")
-            st.write(f"Projected: ${sum(scenario_results[-3:], key=lambda x: x['amount']):,.2f}")
+            st.write(f"Baseline: ${sum(x['amount'] for x in historical_data[-3:]):,.2f}")
+            st.write(f"Projected: ${sum(x['amount'] for x in scenario_results[-3:]):,.2f}")
 
     with tabs[3]:
         st.subheader("🤝 Shared Cost Allocation")
@@ -439,7 +430,7 @@ if st.session_state.connected:
             st.success("Governance assessment complete!")
 
 else:
-    st.info("👋 Welcome to AI FinOps Optimizer! Connect your cloud accounts to begin cost optimization.")
+    st.info("👋 Welcome! Press **Analyse sample data** in the sidebar to explore cost analysis, budgets, anomalies and governance on sample cloud resources.")
 
     c1, c2, c3 = st.columns(3)
     with c1:
@@ -472,4 +463,4 @@ else:
                 st.write(feature['desc'])
 
 st.markdown("---")
-st.caption("Powered by SARVONA AI • [Privacy Policy](https://sarvona.si/privacy) • [Support](mailto:support@sarvona.si)")
+st.caption("SARVONA • Sample data only • [Privacy Policy](https://sarvona.si/privacy-policy/) • Contact: info@sarvona.si")
